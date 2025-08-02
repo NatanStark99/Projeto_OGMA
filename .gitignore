@@ -1,0 +1,26 @@
+# Ambiente virtual
+venv/
+
+# Byte-compiled / cache
+__pycache__/
+*.pyc
+
+# Configurações da IDE
+.vscode/
+.idea/
+
+# Arquivos do sistema
+.DS_Store
+
+# Banco de dados SQLite
+db.sqlite3
+
+# Logs
+*.log
+
+# Arquivos de migrações compilados
+**/migrations/__pycache__/
+**/migrations/*.pyc
+
+# Variáveis de ambiente
+.env
