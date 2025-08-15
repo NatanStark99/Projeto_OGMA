@@ -1,0 +1,62 @@
+{% extends "questionario/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <!-- Seu cabeçalho permanece o mesmo -->
+    </div>
+
+    <div class="form-container">
+        <form method="post" id="behavioralForm">
+            {% csrf_token %}
+            
+            <!-- Dados Pessoais -->
+            <div class="section-title">📋 Dados Pessoais</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ form.nome.id_for_label }}">Nome Completo *</label>
+                    {{ form.nome }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.cargo.id_for_label }}">Cargo *</label>
+                    {{ form.cargo }}
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ form.empresa.id_for_label }}">Empresa *</label>
+                    {{ form.empresa }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.departamento.id_for_label }}">Departamento *</label>
+                    {{ form.departamento }}
+                </div>
+            </div>
+
+            <!-- Perguntas Comportamentais -->
+            <div class="section-title">🧠 Avaliação Comportamental</div>
+            
+            {% for field in form %}
+                {% if field.name|slice:':1' == 'q' %}  <!-- Filtra campos que começam com 'q' -->
+                <div class="question-container">
+                    <div class="question-title">{{ field.label }}</div>
+                    <div class="radio-group">
+                        {% for choice in field %}
+                        <label class="radio-option">
+                            {{ choice.tag }}
+                            <span>{{ choice.choice_label }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+
+            <button type="submit" class="btn">Finalizar Avaliação</button>
+        </form>
+    </div>
+</div>
+<script src="{% static 'js/behavioral-form.js' %}"></script>
+{% endblock %}
